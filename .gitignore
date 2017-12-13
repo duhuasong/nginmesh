@@ -2,3 +2,16 @@
 .vscode
 cmd/inject/nginx-inject
 build/
+2nginx.sh
+3envoy.sh
+test/basic_deployment.sh
+python/__pycache__/
+test/nginx-auth-0212.txt
+test/nginx-noauth-0212.txt
+test/notes_my
+python/veena/
+test/envoy_030.txt
+test/envoy_030_auth.txt
+python/output_py_0212_nginx.txt
+test/grafana_2017_12_11_12_49_PM.png
+*/istio-0.3.0/*

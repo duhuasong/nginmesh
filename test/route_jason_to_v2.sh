@@ -1,11 +1,8 @@
 #!/bin/sh
-export GATEWAY_URL=$(kubectl get svc -n istio-system | grep -E 'istio-ingress' | awk '{ print $4 }')
-NAMESPACE=default
-for rule in $(istioctl get -n ${NAMESPACE} routerules); do
-  istioctl delete -n ${NAMESPACE} routerule $rule;
-done
-istioctl create -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-all-v1.yaml
-istioctl create -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-reviews-test-v2.yaml
+. delete_routes.sh
+istioctl create -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-all-v1.yaml > /dev/null 2>&1
+istioctl create -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-reviews-test-v2.yaml > /dev/null 2>&1
+
 sleep 7;
 i=0 
 j=0
@@ -44,6 +41,7 @@ done
       then
           echo "Route "jason" user to V2 does not work!"
        fi
-istioctl delete -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-all-v1.yaml
-istioctl delete -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-reviews-test-v2.yaml      
+. performance.sh
+istioctl delete -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-all-v1.yaml > /dev/null 2>&1
+istioctl delete -f ../nginmesh-0.2.12/samples/kubernetes/route-rule-reviews-test-v2.yaml > /dev/null 2>&1     
    
